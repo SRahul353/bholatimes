@@ -91,3 +91,14 @@
     </div>
 
 @endsection
+
+@section('scripts')
+    @if(session('open_social_card'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                window.open("{{ route('admin.posts.social-card', session('open_social_card')) }}", "_blank");
+            });
+        </script>
+    @endif
+@endsection
+

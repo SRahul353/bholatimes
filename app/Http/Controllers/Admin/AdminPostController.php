@@ -121,7 +121,7 @@ class AdminPostController extends Controller
         }
         $post->tags()->sync($tagIds);
 
-        return redirect()->route('admin.posts.index')->with('success', 'সংবাদটি সফলভাবে তৈরি ও প্রকাশ করা হয়েছে।');
+        return redirect()->route('admin.posts.index')->with('success', 'সংবাদটি সফলভাবে তৈরি ও প্রকাশ করা হয়েছে।')->with('open_social_card', $post->id);
     }
 
     /**
@@ -236,7 +236,7 @@ class AdminPostController extends Controller
         }
         $post->tags()->sync($tagIds);
 
-        return redirect()->route('admin.posts.index')->with('success', 'সংবাদটি সফলভাবে আপডেট করা হয়েছে।');
+        return redirect()->route('admin.posts.index')->with('success', 'সংবাদটি সফলভাবে আপডেট করা হয়েছে।')->with('open_social_card', $post->id);
     }
 
     /**
@@ -262,5 +262,35 @@ class AdminPostController extends Controller
         $post->delete();
 
         return redirect()->route('admin.posts.index')->with('success', 'সংবাদটি সফলভাবে মুছে ফেলা হয়েছে।');
+    }
+
+    /**
+     * Show the Social Card Generator page for the specified post.
+     */
+    public function socialCard($id)
+    {
+        $post = Post::findOrFail($id);
+        $themeSettingsPath = storage_path('app/theme_settings.json');
+        $themeSettings = [
+            'logo_image' => '',
+            'logo_text' => 'Times<span>Panel</span>'
+        ];
+        if (file_exists($themeSettingsPath)) {
+            $themeSettings = array_merge($themeSettings, json_decode(file_get_contents($themeSettingsPath), true));
+        }
+        $recentPosts = Post::latest()->take(20)->get();
+        return view('admin.posts.social_card', compact('post', 'themeSettings', 'recentPosts'));
+    }
+
+    /**
+     * Redirect to the Social Card Generator of the latest post.
+     */
+    public function socialCardIndex()
+    {
+        $post = Post::latest()->first();
+        if (!$post) {
+            return redirect()->route('admin.dashboard')->with('error', 'কোনো সংবাদ পোস্ট পাওয়া যায়নি।');
+        }
+        return redirect()->route('admin.posts.social-card', $post->id);
     }
 }

@@ -22,6 +22,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
         // Post CRUD Resource
         Route::resource('posts', App\Http\Controllers\Admin\AdminPostController::class)->except(['show']);
+        Route::get('/posts/{id}/social-card', [App\Http\Controllers\Admin\AdminPostController::class, 'socialCard'])->name('posts.social-card');
+        Route::get('/social-card', [App\Http\Controllers\Admin\AdminPostController::class, 'socialCardIndex'])->name('social-card');
         
         // Category CRUD Resource
         Route::resource('categories', App\Http\Controllers\Admin\AdminCategoryController::class)->only(['index', 'store', 'destroy']);

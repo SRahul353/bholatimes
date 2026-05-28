@@ -12,13 +12,13 @@
 
     <style>
         :root {
-            --primary-bg: #0b0f19;    /* Dark deep space blue */
-            --card-bg: rgba(30, 41, 59, 0.45); /* Glassmorphic slate */
+            --primary-bg: #f8fafc;     /* Soft slate light background */
+            --card-bg: #ffffff;        /* Clean white card */
             --accent: #dc2626;         /* Crimson Accent */
             --accent-hover: #b91c1c;
-            --text-main: #f1f5f9;      /* Off white */
-            --text-sub: #94a3b8;       /* Muted slate */
-            --border-color: rgba(255, 255, 255, 0.08);
+            --text-main: #334155;      /* Dark slate gray */
+            --text-sub: #64748b;       /* Muted slate */
+            --border-color: #e2e8f0;   /* Light gray borders */
             --radius: 16px;
             --transition: all 0.3s ease;
         }
@@ -33,8 +33,8 @@
             font-family: 'Noto Sans Bengali', 'Outfit', sans-serif;
             background-color: var(--primary-bg);
             background-image: 
-                radial-gradient(at 10% 20%, rgba(220, 38, 38, 0.1) 0px, transparent 50%),
-                radial-gradient(at 90% 80%, rgba(15, 23, 42, 0.5) 0px, transparent 50%);
+                radial-gradient(at 10% 20%, rgba(220, 38, 38, 0.05) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, rgba(203, 213, 225, 0.3) 0px, transparent 50%);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -47,14 +47,12 @@
         /* Glassmorphic Login Container */
         .login-card {
             background-color: var(--card-bg);
-            backdrop-filter: blur(16px) saturate(120%);
-            -webkit-backdrop-filter: blur(16px) saturate(120%);
             border: 1px solid var(--border-color);
             border-radius: var(--radius);
             width: 100%;
             max-width: 440px;
             padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
             animation: fadeIn 0.8s ease forwards;
         }
 
@@ -79,7 +77,7 @@
             font-weight: 700;
             letter-spacing: -1px;
             margin-bottom: 8px;
-            color: #ffffff;
+            color: var(--text-main);
         }
 
         .brand-logo span {
@@ -123,20 +121,20 @@
         .form-input {
             width: 100%;
             padding: 12px 16px 12px 42px;
-            background-color: rgba(15, 23, 42, 0.6);
+            background-color: #ffffff;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            color: #ffffff;
+            color: var(--text-main);
             font-size: 0.95rem;
             outline: none;
             transition: var(--transition);
             font-family: inherit;
         }
-
+ 
         .form-input:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.25);
-            background-color: rgba(15, 23, 42, 0.85);
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+            background-color: #ffffff;
         }
 
         .form-input:focus + .input-icon {
@@ -221,7 +219,7 @@
         }
 
         .back-home-link:hover {
-            color: #ffffff;
+            color: var(--accent);
         }
     </style>
 </head>
@@ -229,7 +227,7 @@
 
     <div class="login-card">
         <div class="brand-header">
-            <h1 class="brand-logo">ভোলা<span>প্যানেল</span></h1>
+            <h1 class="brand-logo">Times<span>Panel</span></h1>
             <p class="brand-subtitle">নিউজপেপার কন্ট্রোল ড্যাশবোর্ড</p>
         </div>
 

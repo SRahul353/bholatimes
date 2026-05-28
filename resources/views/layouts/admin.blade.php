@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'অ্যাডমিন প্যানেল | দৈনিক ভোলা টাইমস্')</title>
+    <title>@yield('title', 'Times Panel | দৈনিক ভোলা টাইমস্')</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -15,18 +15,18 @@
 
     <style>
         :root {
-            --primary-bg: #090d16;    /* Ultra dark blue-gray background */
-            --sidebar-bg: #0f172a;    /* Navy slate */
-            --content-bg: #0f172a;    /* Navy slate card */
+            --primary-bg: #f8fafc;     /* Soft slate light background */
+            --sidebar-bg: #ffffff;     /* White Sidebar */
+            --content-bg: #ffffff;     /* White main card backgrounds */
             --accent: #dc2626;         /* Crimson Accent */
             --accent-hover: #b91c1c;
-            --text-main: #e2e8f0;      /* Light gray body */
-            --text-dark: #f8fafc;      /* High contrast white */
-            --text-sub: #94a3b8;       /* Slate gray */
-            --border-color: rgba(255, 255, 255, 0.06);
+            --text-main: #334155;      /* Dark slate gray for body text */
+            --text-dark: #0f172a;      /* Slate-900 high contrast */
+            --text-sub: #64748b;       /* Slate-500 muted text */
+            --border-color: #e2e8f0;   /* Light gray borders */
             --radius-md: 12px;
             --radius-sm: 8px;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+            --shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.05), 0 4px 6px -2px rgba(15, 23, 42, 0.03);
             --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             
             --success: #10b981;
@@ -96,7 +96,7 @@
         .brand-title {
             font-size: 1.6rem;
             font-weight: 700;
-            color: #ffffff;
+            color: var(--text-dark);
         }
 
         .brand-title span {
@@ -130,8 +130,8 @@
         }
 
         .menu-link:hover {
-            color: #ffffff;
-            background-color: rgba(255, 255, 255, 0.03);
+            color: var(--text-dark);
+            background-color: #f1f5f9;
             transform: translateX(4px);
         }
 
@@ -153,7 +153,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            background-color: rgba(0, 0, 0, 0.15);
+            background-color: #f8fafc;
         }
 
         .user-avatar {
@@ -178,7 +178,7 @@
         .user-name {
             font-weight: 600;
             font-size: 0.9rem;
-            color: #ffffff;
+            color: var(--text-dark);
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
@@ -214,7 +214,7 @@
             display: none;
             background: none;
             border: none;
-            color: #ffffff;
+            color: var(--text-dark);
             font-size: 1.3rem;
             cursor: pointer;
         }
@@ -222,7 +222,7 @@
         .header-title {
             font-size: 1.2rem;
             font-weight: 700;
-            color: #ffffff;
+            color: var(--text-dark);
         }
 
         .header-right {
@@ -244,6 +244,7 @@
         }
 
         .view-site-btn:hover {
+            background-color: var(--accent);
             border-color: var(--accent);
             color: #ffffff;
         }
@@ -276,7 +277,7 @@
         .card-title {
             font-size: 1.15rem;
             font-weight: 700;
-            color: #ffffff;
+            color: var(--text-dark);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -298,9 +299,9 @@
         }
 
         .alert-success {
-            background-color: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #a7f3d0;
+            background-color: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #065f46;
         }
 
         /* Buttons Framework */
@@ -331,14 +332,14 @@
         }
 
         .btn-secondary {
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: #ffffff;
             border: 1px solid var(--border-color);
             color: var(--text-main);
         }
-
+ 
         .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
+            background-color: #f1f5f9;
+            color: var(--text-dark);
         }
 
         .btn-danger {
@@ -371,9 +372,9 @@
         }
 
         .admin-table th {
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: #f8fafc;
             padding: 14px 16px;
-            color: #ffffff;
+            color: var(--text-dark);
             font-weight: 700;
             border-bottom: 2px solid var(--border-color);
         }
@@ -385,8 +386,8 @@
         }
 
         .admin-table tr:hover td {
-            background-color: rgba(255, 255, 255, 0.01);
-            color: #ffffff;
+            background-color: #f8fafc;
+            color: var(--text-dark);
         }
 
         /* Badges */
@@ -412,16 +413,16 @@
             font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 8px;
-            color: #ffffff;
+            color: var(--text-dark);
         }
 
         .form-control {
             width: 100%;
             padding: 10px 14px;
-            background-color: rgba(9, 13, 22, 0.5);
+            background-color: #ffffff;
             border: 1px solid var(--border-color);
             border-radius: var(--radius-sm);
-            color: #ffffff;
+            color: var(--text-dark);
             font-size: 0.95rem;
             outline: none;
             transition: var(--transition);
@@ -491,6 +492,19 @@
                 padding: 0 16px;
             }
         }
+
+        /* Collapsible Sidebar on Desktop */
+        @media (min-width: 1025px) {
+            .admin-sidebar.collapsed {
+                left: -260px;
+            }
+            .admin-container.expanded {
+                margin-left: 0;
+            }
+            .menu-toggle-btn {
+                display: block !important;
+            }
+        }
     </style>
     @yield('styles')
 </head>
@@ -499,7 +513,7 @@
     <!-- Sidebar Control Bar -->
     <aside class="admin-sidebar" id="sidebarMenu">
         <div class="sidebar-brand">
-            <h2 class="brand-title">ভোলা<span>প্যানেল</span></h2>
+            <h2 class="brand-title">Times<span>Panel</span></h2>
             <button class="menu-toggle-btn" id="closeSidebar"><i class="fa-solid fa-xmark"></i></button>
         </div>
 
@@ -522,6 +536,14 @@
                     <span>সকল সংবাদ</span>
                 </a>
             </li>
+            @can('all-admin-users')
+                <li class="menu-item">
+                    <a href="{{ route('admin.social-card') }}" class="menu-link {{ request()->routeIs('admin.social-card') || request()->routeIs('admin.posts.social-card') ? 'active' : '' }}">
+                        <i class="fa-solid fa-share-nodes"></i>
+                        <span>সোশ্যাল মিডিয়া কার্ড জেনারেটর</span>
+                    </a>
+                </li>
+            @endcan
             @can('admin-or-super')
                 <li class="menu-item">
                     <a href="{{ route('admin.categories.index') }}" class="menu-link {{ request()->routeIs('admin.categories.index') ? 'active' : '' }}">
@@ -577,6 +599,16 @@
 
     <!-- Main Container -->
     <div class="admin-container">
+        <script>
+            // Pre-apply sidebar state to avoid layout shift / flashing
+            if (window.innerWidth > 1024) {
+                const sidebarCollapsed = localStorage.getItem('sidebar-collapsed') === 'true';
+                if (sidebarCollapsed) {
+                    document.getElementById('sidebarMenu').classList.add('collapsed');
+                    document.querySelector('.admin-container').classList.add('expanded');
+                }
+            }
+        </script>
         <!-- Dashboard Top Header Bar -->
         <header class="admin-header">
             <div class="header-left">
@@ -611,9 +643,19 @@
             const openSidebarBtn = document.getElementById('openSidebar');
             const closeSidebarBtn = document.getElementById('closeSidebar');
             const sidebar = document.getElementById('sidebarMenu');
+            const container = document.querySelector('.admin-container');
 
             function toggleSidebar() {
-                sidebar.classList.toggle('open');
+                if (window.innerWidth > 1024) {
+                    sidebar.classList.toggle('collapsed');
+                    container.classList.toggle('expanded');
+                    
+                    // Save the state to localStorage
+                    const isCollapsed = sidebar.classList.contains('collapsed');
+                    localStorage.setItem('sidebar-collapsed', isCollapsed);
+                } else {
+                    sidebar.classList.toggle('open');
+                }
             }
 
             if(openSidebarBtn) openSidebarBtn.addEventListener('click', toggleSidebar);

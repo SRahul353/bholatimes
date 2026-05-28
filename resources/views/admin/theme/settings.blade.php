@@ -7,8 +7,8 @@
 <style>
     /* Styling for Drag & Drop Menu Builder */
     .available-cat-item {
-        background-color: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background-color: #f8fafc;
+        border: 1px solid var(--border-color);
         border-radius: var(--radius-sm);
         padding: 10px 14px;
         display: flex;
@@ -17,12 +17,12 @@
         transition: var(--transition);
     }
     .available-cat-item:hover {
-        background-color: rgba(255, 255, 255, 0.08);
+        background-color: #f1f5f9;
         border-color: var(--accent);
     }
     .menu-item-row {
-        background-color: rgba(30, 41, 59, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background-color: #ffffff;
+        border: 1px solid var(--border-color);
         border-radius: var(--radius-sm);
         padding: 12px 16px;
         display: flex;
@@ -31,7 +31,7 @@
     }
     .menu-item-row.depth-1 {
         margin-left: 45px !important;
-        background-color: rgba(15, 23, 42, 0.6);
+        background-color: #f8fafc;
         border-style: dashed;
         border-left: 3px solid var(--accent);
     }
@@ -42,12 +42,12 @@
         margin-right: 12px;
     }
     .drag-handle:hover {
-        color: #ffffff;
+        color: var(--text-dark);
     }
     .menu-item-title {
         font-weight: 600;
         font-size: 0.95rem;
-        color: #ffffff;
+        color: var(--text-dark);
         flex-grow: 1;
         display: flex;
         align-items: center;
@@ -57,8 +57,8 @@
         gap: 6px;
     }
     .menu-btn {
-        background-color: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background-color: #f8fafc;
+        border: 1px solid var(--border-color);
         color: var(--text-sub);
         width: 32px;
         height: 32px;
@@ -72,7 +72,7 @@
     }
     .menu-btn:hover {
         background-color: var(--primary-bg);
-        color: #ffffff;
+        color: var(--text-dark);
     }
     .menu-btn-indent:hover {
         color: #38bdf8;
@@ -117,7 +117,7 @@
         <div class="row">
             <!-- Left Side: Brand Logo Configuration -->
             <div class="col-lg-6">
-                <h4 class="mb-4 text-white pb-2 border-bottom" style="font-size: 1.05rem; border-color: rgba(255,255,255,0.08) !important;"><i class="fa-solid fa-signature text-danger me-2"></i>লোগো কনফিগারেশন</h4>
+                <h4 class="mb-4 text-dark pb-2 border-bottom" style="font-size: 1.05rem; border-color: var(--border-color) !important;"><i class="fa-solid fa-signature text-danger me-2"></i>লোগো কনফিগারেশন</h4>
 
                 <div class="form-group">
                     <label class="form-label" for="logo_text">লোগো এইচটিএমএল টেক্সট (Logo HTML Text)</label>
@@ -152,7 +152,7 @@
 
             <!-- Right Side: Colors Configuration -->
             <div class="col-lg-6">
-                <h4 class="mb-4 text-white pb-2 border-bottom" style="font-size: 1.05rem; border-color: rgba(255,255,255,0.08) !important;"><i class="fa-solid fa-droplet text-danger me-2"></i>রঙ কনফিগারেশন (Color Palette)</h4>
+                <h4 class="mb-4 text-dark pb-2 border-bottom" style="font-size: 1.05rem; border-color: var(--border-color) !important;"><i class="fa-solid fa-droplet text-danger me-2"></i>রঙ কনফিগারেশন (Color Palette)</h4>
 
                 <div class="row">
                     <div class="col-sm-6 form-group">
@@ -199,7 +199,7 @@
         <!-- Footer Configuration Section -->
         <div class="row mt-4">
             <div class="col-12">
-                <h4 class="mb-4 text-white pb-2 border-bottom" style="font-size: 1.05rem; border-color: rgba(255,255,255,0.08) !important;">
+                <h4 class="mb-4 text-dark pb-2 border-bottom" style="font-size: 1.05rem; border-color: var(--border-color) !important;">
                     <i class="fa-solid fa-rectangle-list text-danger me-2"></i>ফুটার কনফিগারেশন (Footer Settings)
                 </h4>
                 
@@ -264,7 +264,7 @@
                 <div class="row mt-3">
                     <!-- Social Profiles -->
                     <div class="col-md-6">
-                        <h5 class="text-white mb-3" style="font-size: 0.95rem; font-weight: 600;"><i class="fa-solid fa-share-nodes text-danger me-2"></i>সোশ্যাল প্রোফাইল লিংক (Social Links)</h5>
+                        <h5 class="text-dark mb-3" style="font-size: 0.95rem; font-weight: 600;"><i class="fa-solid fa-share-nodes text-danger me-2"></i>সোশ্যাল প্রোফাইল লিংক (Social Links)</h5>
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label class="form-label" for="social_facebook">ফেসবুক (Facebook)</label>
@@ -290,7 +290,7 @@
                     <!-- Copyright Text -->
                     <div class="col-md-6 form-group d-flex flex-column justify-content-between">
                         <div>
-                            <h5 class="text-white mb-3" style="font-size: 0.95rem; font-weight: 600;"><i class="fa-solid fa-copyright text-danger me-2"></i>কпиরাইট ইনফরমেশন</h5>
+                            <h5 class="text-dark mb-3" style="font-size: 0.95rem; font-weight: 600;"><i class="fa-solid fa-copyright text-danger me-2"></i>কপিরাইট ইনফরমেশন</h5>
                             <label class="form-label" for="copyright_text">কпиরাইট টেক্সট (Copyright Notice)</label>
                             <input type="text" name="copyright_text" id="copyright_text" class="form-control" value="{{ old('copyright_text', $settings['copyright_text'] ?? '') }}">
                             <span class="form-text">ফুটারে সর্বনিচে কপিরাইট টেক্সট হিসেবে প্রদর্শিত হবে।</span>
@@ -303,16 +303,16 @@
         <!-- Main Menu Drag & Drop Configuration -->
         <div class="row mt-4">
             <div class="col-12 form-group">
-                <h4 class="mb-3 text-white pb-2 border-bottom" style="font-size: 1.05rem; border-color: rgba(255,255,255,0.08) !important;">
+                <h4 class="mb-3 text-dark pb-2 border-bottom" style="font-size: 1.05rem; border-color: var(--border-color) !important;">
                     <i class="fa-solid fa-bars text-danger me-2"></i>প্রধান মেনু কনফিগারেশন (Drag & Drop Nested Menu Builder)
                 </h4>
-                <span class="form-text mb-3 d-block text-white-50" style="font-size: 0.88rem;">বাম দিকের তালিকা থেকে ক্যাটাগরিগুলো ডান দিকের "মেনু লেআউট" এ যুক্ত করুন। ড্র্যাগ অ্যান্ড ড্রপ করে সাজান এবং সাব-মেনু তৈরি করতে ইনডেন্ট করুন।</span>
+                <span class="form-text mb-3 d-block text-muted" style="font-size: 0.88rem;">বাম দিকের তালিকা থেকে ক্যাটাগরিগুলো ডান দিকের "মেনু লেআউট" এ যুক্ত করুন। ড্র্যাগ অ্যান্ড ড্রপ করে সাজান এবং সাব-মেনু তৈরি করতে ইনডেন্ট করুন।</span>
                 
                 <div class="row">
                     <!-- Left Column: Available Categories -->
                     <div class="col-md-4">
-                        <label class="form-label" style="font-weight: 700; color: #a5b4fc;"><i class="fa-solid fa-list-ul me-1"></i>ক্যাটাগরি সমূহ (Available)</label>
-                        <div class="p-3" style="background-color: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-md); max-height: 400px; overflow-y: auto;">
+                        <label class="form-label" style="font-weight: 700; color: var(--accent);"><i class="fa-solid fa-list-ul me-1"></i>ক্যাটাগরি সমূহ (Available)</label>
+                        <div class="p-3" style="background-color: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); max-height: 400px; overflow-y: auto;">
                             <div class="d-flex flex-column gap-2" id="availableCategories">
                                 <!-- Rendered dynamically by JavaScript -->
                             </div>
@@ -321,8 +321,8 @@
                     
                     <!-- Right Column: Menu Structure -->
                     <div class="col-md-8">
-                        <label class="form-label" style="font-weight: 700; color: #a5b4fc;"><i class="fa-solid fa-network-wired me-1"></i>মেনু লেআউট (Menu Structure)</label>
-                        <div class="p-3" style="background-color: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-md); min-height: 250px;">
+                        <label class="form-label" style="font-weight: 700; color: var(--accent);"><i class="fa-solid fa-network-wired me-1"></i>মেনু লেআউট (Menu Structure)</label>
+                        <div class="p-3" style="background-color: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); min-height: 250px;">
                             <ul class="list-unstyled d-flex flex-column gap-2 mb-0" id="menuBuilderList">
                                 <!-- Rendered dynamically by JavaScript -->
                             </ul>
@@ -343,16 +343,16 @@
         <!-- Homepage Categories Drag & Drop Configuration -->
         <div class="row mt-4">
             <div class="col-12 form-group">
-                <h4 class="mb-3 text-white pb-2 border-bottom" style="font-size: 1.05rem; border-color: rgba(255,255,255,0.08) !important;">
+                <h4 class="mb-3 text-dark pb-2 border-bottom" style="font-size: 1.05rem; border-color: var(--border-color) !important;">
                     <i class="fa-solid fa-house-laptop text-danger me-2"></i>হোমপেজ ক্যাটাগরি লেআউট কনফিগারেশন (Drag & Drop Category Order)
                 </h4>
-                <span class="form-text mb-3 d-block text-white-50" style="font-size: 0.88rem;">বাম দিকের তালিকা থেকে ক্যাটাগরিগুলো ডান দিকের "হোমপেজ লেআউট" এ যুক্ত করুন। ড্র্যাগ অ্যান্ড ড্রপ করে তাদের প্রদর্শনীর ক্রম সাজান। হোমপেজে এই ক্যাটাগরিগুলো ঠিক এই ক্রমানুসারে একের পর এক প্রদর্শিত হবে। কোনোটিই সাজানো না থাকলে হোমপেজে শুধুমাত্র শীর্ষ খবর ও সর্বশেষ খবর প্রদর্শিত হবে (কোনো ক্যাটাগরি ব্লক প্রদর্শিত হবে না)।</span>
+                <span class="form-text mb-3 d-block text-muted" style="font-size: 0.88rem;">বাম দিকের তালিকা থেকে ক্যাটাগরিগুলো ডান দিকের "হোমপেজ লেআউট" এ যুক্ত করুন। ড্র্যাগ অ্যান্ড ড্রপ করে তাদের প্রদর্শনীর ক্রম সাজান। হোমপেজে এই ক্যাটাগরিগুলো ঠিক এই ক্রমানুসারে একের পর এক প্রদর্শিত হবে। কোনোটিই সাজানো না থাকলে হোমপেজে শুধুমাত্র শীর্ষ খবর ও সর্বশেষ খবর প্রদর্শিত হবে (কোনো ক্যাটাগরি ব্লক প্রদর্শিত হবে না)।</span>
                 
                 <div class="row">
                     <!-- Left Column: Available Categories -->
                     <div class="col-md-4">
-                        <label class="form-label" style="font-weight: 700; color: #a5b4fc;"><i class="fa-solid fa-list-ul me-1"></i>ক্যাটাগরি সমূহ (Available)</label>
-                        <div class="p-3" style="background-color: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-md); max-height: 400px; overflow-y: auto;">
+                        <label class="form-label" style="font-weight: 700; color: var(--accent);"><i class="fa-solid fa-list-ul me-1"></i>ক্যাটাগরি সমূহ (Available)</label>
+                        <div class="p-3" style="background-color: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); max-height: 400px; overflow-y: auto;">
                             <div class="d-flex flex-column gap-2" id="availableHomeCategories">
                                 <!-- Rendered dynamically by JavaScript -->
                             </div>
@@ -361,8 +361,8 @@
                     
                     <!-- Right Column: Home Category Layout Order -->
                     <div class="col-md-8">
-                        <label class="form-label" style="font-weight: 700; color: #a5b4fc;"><i class="fa-solid fa-layer-group me-1"></i>হোমপেজ লেআউট (Homepage Layout Order)</label>
-                        <div class="p-3" style="background-color: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-md); min-height: 250px;">
+                        <label class="form-label" style="font-weight: 700; color: var(--accent);"><i class="fa-solid fa-layer-group me-1"></i>হোমপেজ লেআউট (Homepage Layout Order)</label>
+                        <div class="p-3" style="background-color: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); min-height: 250px;">
                             <ul class="list-unstyled d-flex flex-column gap-2 mb-0" id="homeCategoryList">
                                 <!-- Rendered dynamically by JavaScript -->
                             </ul>
@@ -382,7 +382,7 @@
         <!-- Custom CSS Area -->
         <div class="row mt-4">
             <div class="col-12 form-group">
-                <h4 class="mb-3 text-white pb-2 border-bottom" style="font-size: 1.05rem; border-color: rgba(255,255,255,0.08) !important;"><i class="fa-solid fa-code text-danger me-2"></i>কাস্টম সিএসএস (Custom CSS Overlay)</h4>
+                <h4 class="mb-3 text-dark pb-2 border-bottom" style="font-size: 1.05rem; border-color: var(--border-color) !important;"><i class="fa-solid fa-code text-danger me-2"></i>কাস্টম সিএসএস (Custom CSS Overlay)</h4>
                 <label class="form-label" for="custom_css">অতিরিক্ত সিএসএস কোড (Custom Stylesheets)</label>
                 <textarea name="custom_css" id="custom_css" rows="6" class="form-control" style="font-family: monospace; font-size: 0.9rem;" placeholder="/* Add custom styles here */&#10;body {&#10;    /* custom style rules */&#10;}">{{ old('custom_css', $settings['custom_css']) }}</textarea>
                 <span class="form-text">এখানে লেখা সিএসএস রুলস সরাসরি সাইটের মূল সিএসএস-এর নিচে ইনজেক্ট করা হবে। সতর্কতার সাথে কোড লিখুন।</span>
@@ -390,7 +390,7 @@
         </div>
 
         <!-- Form Actions -->
-        <div class="mt-4 pt-3 d-flex gap-3" style="border-top: 1px solid rgba(255,255,255,0.08);">
+        <div class="mt-4 pt-3 d-flex gap-3" style="border-top: 1px solid var(--border-color);">
             <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>ডিজাইন পরিবর্তন সংরক্ষণ করুন</button>
             <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary"><i class="fa-solid fa-ban me-1"></i>বাতিল করুন</a>
         </div>
@@ -433,7 +433,7 @@
                     const div = document.createElement('div');
                     div.className = 'available-cat-item';
                     div.innerHTML = `
-                        <span style="font-weight: 600; color: #cbd5e1;">${cat.name}</span>
+                        <span style="font-weight: 600; color: var(--text-dark);">${cat.name}</span>
                         <button type="button" class="btn btn-secondary btn-sm p-1 px-2" onclick="addMenuItem(${cat.id}, '${cat.name.replace(/'/g, "\\'")}')">
                             <i class="fa-solid fa-plus"></i>
                         </button>
@@ -564,7 +564,7 @@
                     const div = document.createElement('div');
                     div.className = 'available-cat-item';
                     div.innerHTML = `
-                        <span style="font-weight: 600; color: #cbd5e1;">${cat.name}</span>
+                        <span style="font-weight: 600; color: var(--text-dark);">${cat.name}</span>
                         <button type="button" class="btn btn-secondary btn-sm p-1 px-2" onclick="addHomeCategory(${cat.id}, '${cat.name.replace(/'/g, "\\'")}')">
                             <i class="fa-solid fa-plus"></i>
                         </button>
