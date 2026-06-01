@@ -755,30 +755,15 @@
                         if (!isAlreadyPlaced) {
                             const img = post._embedded && post._embedded['wp:featuredmedia'] ? post._embedded['wp:featuredmedia'][0].source_url : '';
                             
-                            // Define default style based on page
-                            let defaultFontSize = 14;
-                            if (matchedPage === 1) defaultFontSize = 16;
-                            
-                            const slotObject = {
-                                slot_id: matchedSlot,
-                                post_id: post.id,
+                            const postData = {
+                                id: post.id,
                                 title: post.title.rendered,
                                 content: post.content ? post.content.rendered : '',
                                 excerpt: post.excerpt ? post.excerpt.rendered : '',
-                                image: img,
-                                style: {
-                                    font_size: defaultFontSize,
-                                    columns: matchedPage === 1 ? 2 : 2,
-                                    char_limit: 1500,
-                                    line_height: "1.15",
-                                    title_align: "center",
-                                    title_color: "#111111",
-                                    font_weight: "bold",
-                                    word_spacing: "0px",
-                                    text_align: "justify",
-                                    show_image: true
-                                }
+                                image: img
                             };
+                            
+                            const slotObject = getSlotDefaultObject(matchedPage, matchedSlot, postData);
 
                             placeActions.push({ page: matchedPage, slot: matchedSlot, data: slotObject });
                             filledSlots.add(slotKey);
@@ -901,10 +886,7 @@
         });
     }
 
-    function placeContent(page, slotId, data) {
-        if (page === 3) return;
-        saveHistoryState();
-
+    function getSlotDefaultObject(page, slotId, data) {
         const rawContent = data.content || data.excerpt || '';
         const cleanText = rawContent.replace(/(<([^>]+)>)/gi, "");
         let defaultFontSize = 16;
@@ -932,11 +914,18 @@
             show_image: true
         };
 
-        const slotData = {
+        return {
             slot_id: slotId, post_id: data.id,
             title: data.title, content: cleanText,
             image: data.image, style: style
         };
+    }
+
+    function placeContent(page, slotId, data) {
+        if (page === 3) return;
+        saveHistoryState();
+
+        const slotData = getSlotDefaultObject(page, slotId, data);
 
         pagesData[page] = pagesData[page].filter(s => s.slot_id !== slotId);
         pagesData[page].push(slotData);
