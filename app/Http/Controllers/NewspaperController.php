@@ -243,50 +243,50 @@ class NewspaperController extends Controller
             }
         }
 
-        $posts = collect();
+        $pagesData = [
+            '1' => [], '2' => [], '3' => [], '4' => []
+        ];
         $hasSavedEPaper = false;
 
-        if ($epaper && is_array($epaper->layout_data)) {
+        if ($epaper) {
             $hasSavedEPaper = true;
-            $postIds = $epaper->layout_data;
-            
-            // Fetch posts matching these IDs
-            $postsMap = Post::with(['categories', 'user'])
-                ->whereIn('id', $postIds)
-                ->get()
-                ->keyBy('id');
-
-            // Construct array keeping order and nulls for empty slots
-            $orderedPosts = [];
-            foreach ($postIds as $id) {
-                if (isset($postsMap[$id])) {
-                    $orderedPosts[] = $postsMap[$id];
-                } else {
-                    $orderedPosts[] = null;
+            if (!empty($epaper->pages_data)) {
+                $pagesData = $epaper->pages_data;
+            } elseif (!empty($epaper->layout_data)) {
+                // Legacy fallback
+                $postIds = $epaper->layout_data;
+                $postsMap = Post::with(['user'])->whereIn('id', $postIds)->get()->keyBy('id');
+                $page1 = [];
+                foreach ($postIds as $idx => $id) {
+                    if ($id && isset($postsMap[$id])) {
+                        $p = $postsMap[$id];
+                        $page1[] = [
+                            'slot_id' => $idx + 1,
+                            'post_id' => $p->id,
+                            'title' => $p->title,
+                            'excerpt' => strip_tags($p->content),
+                            'image' => $p->featured_image_url,
+                            'style' => ['font_size' => 14, 'columns' => 2, 'char_limit' => 1200]
+                        ];
+                    }
                 }
-            }
-            $posts = collect($orderedPosts);
-        } else {
-            // Fallback for brand-new sites with absolutely no saved e-papers yet:
-            // Load the last 16 published posts to keep the layout looking complete!
-            if (!$request->has('date')) {
-                $fallbackPosts = Post::with(['categories', 'user'])
-                    ->where('status', 'publish')
-                    ->latest()
-                    ->limit(16)
-                    ->get();
-                
-                $orderedPosts = [];
-                for ($i = 0; $i < 16; $i++) {
-                    $orderedPosts[] = $fallbackPosts->get($i) ?? null;
-                }
-                $posts = collect($orderedPosts);
-                $hasSavedEPaper = true; // treat as active showcase
+                $pagesData['1'] = $page1;
             }
         }
 
         $selectedDate = $date;
 
-        return view('epaper.show', compact('posts', 'selectedDate', 'hasSavedEPaper'));
+        $days = ['Sunday'=>'রবিবার','Monday'=>'সোমবার','Tuesday'=>'মঙ্গলবার','Wednesday'=>'বুধবার','Thursday'=>'বৃহস্পতিবার','Friday'=>'শুক্রবার','Saturday'=>'শনিবার'];
+        $months = ['Jan'=>'জানুয়ারি','Feb'=>'ফেব্রুয়ারি','Mar'=>'মার্চ','Apr'=>'এপ্রিল','May'=>'মে','Jun'=>'জুন','Jul'=>'জুলাই','Aug'=>'আগস্ট','Sep'=>'সেপ্টেম্বর','Oct'=>'অক্টোবর','Nov'=>'নভেম্বর','Dec'=>'ডিসেম্বর'];
+        $enNumbers = ['0','1','2','3','4','5','6','7','8','9'];
+        $bnNumbers = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+
+        $dayNum = str_replace($enNumbers, $bnNumbers, $selectedDate->format('d'));
+        $yearNum = str_replace($enNumbers, $bnNumbers, $selectedDate->format('Y'));
+        $monthName = $months[$selectedDate->format('M')] ?? $selectedDate->format('M');
+        $dayName = $days[$selectedDate->format('l')] ?? $selectedDate->format('l');
+        $formattedDate = "{$dayNum} {$monthName} {$yearNum} ({$dayName})";
+
+        return view('epaper.show', compact('pagesData', 'selectedDate', 'hasSavedEPaper', 'formattedDate'));
     }
 }

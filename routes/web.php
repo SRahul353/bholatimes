@@ -39,6 +39,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/epaper', [App\Http\Controllers\Admin\AdminEPaperController::class, 'index'])->name('epaper.index');
         Route::get('/epaper/load', [App\Http\Controllers\Admin\AdminEPaperController::class, 'loadDateData'])->name('epaper.load');
         Route::post('/epaper/save', [App\Http\Controllers\Admin\AdminEPaperController::class, 'store'])->name('epaper.save');
+        Route::get('/epaper/wp-posts', [App\Http\Controllers\Admin\AdminEPaperController::class, 'proxyWPPosts'])->name('epaper.wp_posts');
+        Route::get('/epaper/proxy-image', [App\Http\Controllers\Admin\AdminEPaperController::class, 'proxyImage'])->name('epaper.proxy_image');
     });
 });
 

@@ -7,6 +7,7 @@ use App\Models\EPaper;
 use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class AdminEPaperController extends Controller
 {
@@ -15,11 +16,24 @@ class AdminEPaperController extends Controller
      */
     public function index()
     {
-        return view('admin.epaper.index');
+        $selectedDate = Carbon::today();
+        
+        $days = ['Sunday'=>'রবিবার','Monday'=>'সোমবার','Tuesday'=>'মঙ্গলবার','Wednesday'=>'বুধবার','Thursday'=>'বৃহস্পতিবার','Friday'=>'শুক্রবার','Saturday'=>'শনিবার'];
+        $months = ['Jan'=>'জানুয়ারি','Feb'=>'ফেব্রুয়ারি','Mar'=>'মার্চ','Apr'=>'এপ্রিল','May'=>'মে','Jun'=>'জুন','Jul'=>'জুলাই','Aug'=>'আগস্ট','Sep'=>'সেপ্টেম্বর','Oct'=>'অক্টোবর','Nov'=>'নভেম্বর','Dec'=>'ডিসেম্বর'];
+        $enNumbers = ['0','1','2','3','4','5','6','7','8','9'];
+        $bnNumbers = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+
+        $dayNum = str_replace($enNumbers, $bnNumbers, $selectedDate->format('d'));
+        $yearNum = str_replace($enNumbers, $bnNumbers, $selectedDate->format('Y'));
+        $monthName = $months[$selectedDate->format('M')] ?? $selectedDate->format('M');
+        $dayName = $days[$selectedDate->format('l')] ?? $selectedDate->format('l');
+        $formattedDate = "{$dayNum} {$monthName} {$yearNum} ({$dayName})";
+
+        return view('admin.epaper.index', compact('selectedDate', 'formattedDate'));
     }
 
     /**
-     * Load the news articles and saved layout data for a specific date via AJAX.
+     * Load the saved layout data for a specific date via AJAX.
      */
     public function loadDateData(Request $request)
     {
@@ -30,62 +44,59 @@ class AdminEPaperController extends Controller
         $dateString = $request->input('date');
         $date = Carbon::parse($dateString);
 
-        // 1. Fetch published posts specifically on this date
-        $datePosts = Post::with(['categories', 'user'])
-            ->where('status', 'publish')
-            ->whereDate('created_at', $date)
-            ->latest()
-            ->get();
-
-        // 2. Fetch recent posts (last 30) for fallback/general selection
-        $recentPosts = Post::with(['categories', 'user'])
-            ->where('status', 'publish')
-            ->latest()
-            ->limit(30)
-            ->get();
-
-        // 3. Find existing E-Paper layout for this date
+        // Find existing E-Paper layout for this date
         $epaper = EPaper::whereDate('publish_date', $date)->first();
 
-        $savedLayout = [];
-        if ($epaper && is_array($epaper->layout_data)) {
-            // Load full post objects in the exact order stored in layout_data
-            $postIds = $epaper->layout_data;
-            
-            // Fetch the posts matching these IDs
-            $postsMap = Post::with(['categories', 'user'])
-                ->whereIn('id', $postIds)
-                ->get()
-                ->keyBy('id');
+        $savedLayout = [
+            '1' => [],
+            '2' => [],
+            '3' => [],
+            '4' => [],
+        ];
 
-            // Construct array keeping nulls for any deleted/missing posts
-            foreach ($postIds as $id) {
-                if (isset($postsMap[$id])) {
-                    $savedLayout[] = $postsMap[$id];
-                } else {
-                    $savedLayout[] = null;
+        if ($epaper) {
+            if (!empty($epaper->pages_data)) {
+                $savedLayout = $epaper->pages_data;
+            } elseif (!empty($epaper->layout_data)) {
+                // Legacy migration
+                $postIds = $epaper->layout_data;
+                $postsMap = Post::whereIn('id', $postIds)->get()->keyBy('id');
+                $page1 = [];
+                foreach ($postIds as $idx => $id) {
+                    if ($id && isset($postsMap[$id])) {
+                        $p = $postsMap[$id];
+                        $page1[] = [
+                            'slot_id' => $idx + 1,
+                            'post_id' => $p->id,
+                            'title' => $p->title,
+                            'excerpt' => strip_tags($p->content), // simplify for migration
+                            'image' => $p->featured_image_url,
+                            'style' => ['font_size' => 14]
+                        ];
+                    }
                 }
-            }
-        } else {
-            // Pre-populate with up to 16 of the day's posts as a convenient default starting draft!
-            $draftPosts = $datePosts->take(16);
-            foreach ($draftPosts as $p) {
-                $savedLayout[] = $p;
-            }
-            // Pad out to 16 elements
-            while (count($savedLayout) < 16) {
-                $savedLayout[] = null;
+                $savedLayout['1'] = $page1;
             }
         }
+
+        $days = ['Sunday'=>'রবিবার','Monday'=>'সোমবার','Tuesday'=>'মঙ্গলবার','Wednesday'=>'বুধবার','Thursday'=>'বৃহস্পতিবার','Friday'=>'শুক্রবার','Saturday'=>'শনিবার'];
+        $months = ['Jan'=>'জানুয়ারি','Feb'=>'ফেব্রুয়ারি','Mar'=>'মার্চ','Apr'=>'এপ্রিল','May'=>'মে','Jun'=>'জুন','Jul'=>'জুলাই','Aug'=>'আগস্ট','Sep'=>'সেপ্টেম্বর','Oct'=>'অক্টোবর','Nov'=>'নভেম্বর','Dec'=>'ডিসেম্বর'];
+        $enNumbers = ['0','1','2','3','4','5','6','7','8','9'];
+        $bnNumbers = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+
+        $dayNum = str_replace($enNumbers, $bnNumbers, $date->format('d'));
+        $yearNum = str_replace($enNumbers, $bnNumbers, $date->format('Y'));
+        $monthName = $months[$date->format('M')] ?? $date->format('M');
+        $dayName = $days[$date->format('l')] ?? $date->format('l');
+        $formattedDate = "{$dayNum} {$monthName} {$yearNum} ({$dayName})";
 
         return response()->json([
             'success' => true,
             'date' => $dateString,
-            'date_posts' => $datePosts,
-            'recent_posts' => $recentPosts,
             'saved_layout' => $savedLayout,
             'has_saved' => $epaper ? true : false,
-            'title' => $epaper ? $epaper->title : 'প্রথম পাতা'
+            'title' => $epaper ? $epaper->title : 'প্রথম পাতা',
+            'formatted_date' => $formattedDate
         ]);
     }
 
@@ -96,25 +107,20 @@ class AdminEPaperController extends Controller
     {
         $request->validate([
             'date' => 'required|date_format:Y-m-d',
-            'layout' => 'required|array|size:16',
+            'layout' => 'required|array', // Now expects the 4-page json
             'title' => 'nullable|string|max:100'
         ]);
 
         $date = Carbon::parse($request->input('date'));
-        $layoutIds = $request->input('layout'); // e.g. [12, null, 45, ...]
-        
-        // Clean layout array to ensure it casts properly in JSON
-        $layoutIdsCleaned = [];
-        foreach ($layoutIds as $id) {
-            $layoutIdsCleaned[] = $id ? (int)$id : null;
-        }
+        $layoutData = $request->input('layout'); 
 
         // Save or update layout
         $epaper = EPaper::updateOrCreate(
             ['publish_date' => $date, 'page_number' => 1],
             [
                 'title' => $request->input('title') ?? 'প্রথম পাতা',
-                'layout_data' => $layoutIdsCleaned,
+                'pages_data' => $layoutData,
+                'total_pages' => 4,
                 'image' => null // image is unused since broadsheet is built dynamically
             ]
         );
@@ -124,5 +130,81 @@ class AdminEPaperController extends Controller
             'message' => 'ই-পেপার লেআউট সফলভাবে সংরক্ষিত হয়েছে।',
             'epaper' => $epaper
         ]);
+    }
+
+    /**
+     * Proxy WordPress REST API to fetch posts and avoid CORS issues.
+     */
+    public function proxyWPPosts(Request $request)
+    {
+        // Force the live site URL as requested
+        $siteUrl = 'https://www.bholatimes24.com';
+        
+        $perPage = $request->input('per_page', 50);
+        $search = $request->input('search', '');
+        $date = $request->input('date', ''); // optional exact date
+
+        $query = [
+            'per_page' => $perPage,
+            '_embed' => '1',
+            'status' => 'publish'
+        ];
+
+        if (!empty($search)) {
+            $query['search'] = $search;
+        }
+
+        if (!empty($date)) {
+            $carbonDate = Carbon::parse($date);
+            $query['after'] = $carbonDate->startOfDay()->toIso8601String();
+            $query['before'] = $carbonDate->endOfDay()->toIso8601String();
+        }
+
+        try {
+            $response = Http::withoutVerifying()->timeout(15)->get($siteUrl . '/wp-json/wp/v2/posts', $query);
+            
+            if ($response->successful()) {
+                return response()->json([
+                    'success' => true,
+                    'posts' => $response->json()
+                ]);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch from WP API: ' . $e->getMessage(),
+                'posts' => []
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Failed to fetch from WP API',
+            'posts' => []
+        ]);
+    }
+
+    /**
+     * Proxy image requests to bypass CORS restrictions during html2canvas export.
+     */
+    public function proxyImage(Request $request)
+    {
+        $url = $request->input('url');
+        if (!$url) {
+            return response('No URL provided', 400);
+        }
+
+        try {
+            $response = Http::withoutVerifying()->timeout(10)->get($url);
+            if ($response->successful()) {
+                $contentType = $response->header('Content-Type');
+                return response($response->body(), 200)
+                    ->header('Content-Type', $contentType ?: 'image/jpeg')
+                    ->header('Access-Control-Allow-Origin', '*');
+            }
+        } catch (\Exception $e) {
+            // fail silently and return empty
+        }
+        return response('', 404);
     }
 }
