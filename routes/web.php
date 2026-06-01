@@ -41,6 +41,34 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/epaper/save', [App\Http\Controllers\Admin\AdminEPaperController::class, 'store'])->name('epaper.save');
         Route::get('/epaper/wp-posts', [App\Http\Controllers\Admin\AdminEPaperController::class, 'proxyWPPosts'])->name('epaper.wp_posts');
         Route::get('/epaper/proxy-image', [App\Http\Controllers\Admin\AdminEPaperController::class, 'proxyImage'])->name('epaper.proxy_image');
+        
+        // Secure Live Deployment Helper Routes
+        Route::get('/epaper/migrate', function () {
+            try {
+                \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Database migrated successfully.',
+                    'output' => \Illuminate\Support\Facades\Artisan::output()
+                ]);
+            } catch (\Exception $e) {
+                return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+            }
+        })->name('epaper.migrate');
+
+        Route::get('/epaper/clear-cache', function () {
+            try {
+                \Illuminate\Support\Facades\Artisan::call('view:clear');
+                \Illuminate\Support\Facades\Artisan::call('cache:clear');
+                \Illuminate\Support\Facades\Artisan::call('config:clear');
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Cache, view, and config cleared successfully.'
+                ]);
+            } catch (\Exception $e) {
+                return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+            }
+        })->name('epaper.clear_cache');
     });
 });
 
