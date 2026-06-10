@@ -28,8 +28,10 @@ class AdminEPaperController extends Controller
         $monthName = $months[$selectedDate->format('M')] ?? $selectedDate->format('M');
         $dayName = $days[$selectedDate->format('l')] ?? $selectedDate->format('l');
         $formattedDate = "{$dayNum} {$monthName} {$yearNum} ({$dayName})";
+        
+        $formattedEPaperHeaderDate = \App\Helpers\BanglaDateHelper::getFormattedEPaperDate($selectedDate);
 
-        return view('admin.epaper.index', compact('selectedDate', 'formattedDate'));
+        return view('admin.epaper.index', compact('selectedDate', 'formattedDate', 'formattedEPaperHeaderDate'));
     }
 
     /**
@@ -83,12 +85,13 @@ class AdminEPaperController extends Controller
         $months = ['Jan'=>'জানুয়ারি','Feb'=>'ফেব্রুয়ারি','Mar'=>'মার্চ','Apr'=>'এপ্রিল','May'=>'মে','Jun'=>'জুন','Jul'=>'জুলাই','Aug'=>'আগস্ট','Sep'=>'সেপ্টেম্বর','Oct'=>'অক্টোবর','Nov'=>'নভেম্বর','Dec'=>'ডিসেম্বর'];
         $enNumbers = ['0','1','2','3','4','5','6','7','8','9'];
         $bnNumbers = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-
         $dayNum = str_replace($enNumbers, $bnNumbers, $date->format('d'));
         $yearNum = str_replace($enNumbers, $bnNumbers, $date->format('Y'));
         $monthName = $months[$date->format('M')] ?? $date->format('M');
         $dayName = $days[$date->format('l')] ?? $date->format('l');
         $formattedDate = "{$dayNum} {$monthName} {$yearNum} ({$dayName})";
+        
+        $formattedEPaperHeaderDate = \App\Helpers\BanglaDateHelper::getFormattedEPaperDate($date);
 
         return response()->json([
             'success' => true,
@@ -96,7 +99,8 @@ class AdminEPaperController extends Controller
             'saved_layout' => $savedLayout,
             'has_saved' => $epaper ? true : false,
             'title' => $epaper ? $epaper->title : 'প্রথম পাতা',
-            'formatted_date' => $formattedDate
+            'formatted_date' => $formattedDate,
+            'formatted_epaper_header_date' => $formattedEPaperHeaderDate
         ]);
     }
 

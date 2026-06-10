@@ -286,7 +286,8 @@ class NewspaperController extends Controller
         $monthName = $months[$selectedDate->format('M')] ?? $selectedDate->format('M');
         $dayName = $days[$selectedDate->format('l')] ?? $selectedDate->format('l');
         $formattedDate = "{$dayNum} {$monthName} {$yearNum} ({$dayName})";
+        $formattedEPaperHeaderDate = \App\Helpers\BanglaDateHelper::getFormattedEPaperDate($selectedDate);
 
-        return view('epaper.show', compact('pagesData', 'selectedDate', 'hasSavedEPaper', 'formattedDate'));
+        return view('epaper.show', compact('pagesData', 'selectedDate', 'hasSavedEPaper', 'formattedDate', 'formattedEPaperHeaderDate'));
     }
 }

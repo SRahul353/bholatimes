@@ -195,7 +195,7 @@
             color: #111111;
             box-shadow: var(--shadow-lg);
             position: relative;
-            font-family: 'SutonnyOMJ', 'SolaimanLipi', 'Noto Serif Bengali', serif;
+            font-family: 'bangla', 'SutonnyOMJ', 'SolaimanLipi', 'Noto Serif Bengali', serif;
             box-sizing: border-box;
         }
 
@@ -275,9 +275,47 @@
             flex: 1;
             box-sizing: border-box;
         }
-        #grid1 { grid-template-rows: repeat(6, minmax(0, 1fr)); height: calc(1300px - 196px); }
-        #grid2 { grid-template-rows: repeat(16, minmax(0, 1fr)); height: 1260px; }
-        #grid4 { grid-template-rows: repeat(16, minmax(0, 1fr)); height: 1260px; }
+        #grid1 { grid-template-rows: repeat(6, minmax(0, 1fr)); height: calc(1300px - 188px); grid-template-columns: repeat(8, 1fr); }
+        #grid2 { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, minmax(0, 1fr)); height: 1260px; gap: 10px; }
+        #grid4 { grid-template-rows: auto repeat(6, minmax(0, 1fr)); height: calc(1300px - 60px); grid-template-columns: repeat(8, 1fr); gap: 10px; }
+
+        /* Category Boxes (Page 2) */
+        .category-box {
+            border: 2px solid #e5e7eb;
+            border-top: 4px solid #111111;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            border-radius: 4px;
+        }
+        .category-header {
+            background: linear-gradient(to right, #f3f4f6 0%, #ffffff 100%);
+            border-bottom: 2px solid #e5e7eb;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .category-header i {
+            color: #dc2626;
+            font-size: 1.1rem;
+        }
+        .category-header span {
+            font-family: 'Noto Sans Bengali', sans-serif;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: #111111;
+            letter-spacing: -0.5px;
+        }
+
+        /* Page 1 Slot 3 Box Highlight Style */
+        #grid1 .drop-slot[data-slot="3"] {
+            border: 1.5px solid #222222;
+            padding: 6px !important;
+            background: rgba(17, 17, 17, 0.02);
+        }
 
         /* ─── Article Slots & Renderer ─── */
         .drop-slot {
@@ -303,7 +341,7 @@
             margin-bottom: 6px;
             line-height: 1.25;
             letter-spacing: -0.2px;
-            font-family: 'Noto Serif Bengali', 'SutonnyOMJ', serif;
+            font-family: 'bangla', 'Noto Serif Bengali', 'SutonnyOMJ', serif;
         }
 
         .rendered-image-wrapper {
@@ -315,6 +353,14 @@
             border: 1px solid #dddddd;
             border-radius: 4px;
         }
+        .rendered-image-wrapper.half {
+            width: 50% !important;
+            height: auto !important;
+            aspect-ratio: 4 / 3 !important;
+            float: left;
+            margin-right: 8px;
+            margin-bottom: 4px;
+        }
         .rendered-image-wrapper img {
             width: 100%;
             height: 100%;
@@ -322,46 +368,43 @@
         }
 
         .rendered-excerpt {
-            font-size: 0.9rem;
-            line-height: 1.2;
+            font-size: 12px !important;
+            line-height: 1.02;
             color: #222222;
             text-align: justify;
-            column-gap: 15px;
+            column-gap: 8px;
             overflow: hidden;
-            flex: 1;
-            min-height: 0;
-            font-family: 'SutonnyOMJ', 'SolaimanLipi', 'Noto Serif Bengali', serif;
+            margin-top: auto;
+            font-family: 'bangla', 'SutonnyOMJ', 'SolaimanLipi', 'Noto Serif Bengali', serif;
         }
 
-        /* ─── Page 3 (Jumps Grid) ─── */
         .jump-grid {
             column-count: 4;
-            column-gap: 20px;
-            height: 1178px;
+            column-gap: 15px;
+            height: 1195px;
+            column-fill: auto;
+            overflow: hidden;
             box-sizing: border-box;
         }
         .jump-slot {
-            break-inside: avoid;
-            margin-bottom: 20px;
+            margin-bottom: 3px;
             background: #ffffff;
-            border-bottom: 2px solid #111111;
-            padding-bottom: 15px;
+            padding-bottom: 3px;
             cursor: pointer;
-            box-sizing: border-box;
         }
         .jump-slot:hover {
             background: rgba(220,38,38, 0.02);
         }
         .jump-title {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: bold;
             color: #111111;
-            border-bottom: 1px solid #eeeeee;
-            padding-bottom: 4px;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            margin-bottom: 2px;
+            display: block;
+            line-height: 1.4;
+            height: 1.4em;
+            overflow: hidden;
+            text-align: center;
             font-family: 'Noto Serif Bengali', sans-serif;
         }
         .jump-meta {
@@ -371,9 +414,9 @@
         }
 
         .jump-tag {
-            color: var(--accent);
+            color: #111111;
             font-weight: bold;
-            font-size: 0.75rem;
+            font-size: inherit;
             display: inline-block;
             margin-left: 4px;
             font-family: 'Noto Sans Bengali', sans-serif;
@@ -474,25 +517,27 @@
                             <div style="background: #111111; color: #ffffff; padding: 6px 15px; display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: bold; margin-top: 5px; font-family: 'Noto Sans Bengali', sans-serif;">
                                 <span>রেজিঃ নং - ১২৩৪</span>
                                 <span id="mastheadDateDisplay">{{ $formattedDate }}</span>
+                                <span id="epaperBnDate"></span>
                                 <span id="epaperHijriDate"></span>
                                 <span>মূল্য: ৫ টাকা</span>
                             </div>
                         </header>
                         
-                        <div class="broadsheet-grid" id="grid1" style="padding: 0 15px 15px 15px;">
-                            <!-- Empty slot placeholders — dynamically populated client-side -->
-                            <!-- Row 1 & 2 -->
-                            <div class="drop-slot empty-slot" data-slot="1" style="grid-column: span 15; grid-row: span 2;"></div>
-                            <div class="drop-slot empty-slot" data-slot="2" style="grid-column: span 6; grid-row: span 2;"></div>
-                            <div class="drop-slot empty-slot" data-slot="3" style="grid-column: span 11; grid-row: span 2;"></div>
-                            <!-- Row 3 & 4 -->
-                            <div class="drop-slot empty-slot" data-slot="4" style="grid-column: span 11; grid-row: span 2;"></div>
-                            <div class="drop-slot empty-slot" data-slot="5" style="grid-column: span 10; grid-row: span 2;"></div>
-                            <div class="drop-slot empty-slot" data-slot="6" style="grid-column: span 11; grid-row: span 2;"></div>
-                            <!-- Row 5 & 6 -->
-                            <div class="drop-slot empty-slot" data-slot="7" style="grid-column: span 10; grid-row: span 2;"></div>
-                            <div class="drop-slot empty-slot" data-slot="8" style="grid-column: span 12; grid-row: span 2;"></div>
-                            <div class="drop-slot empty-slot" data-slot="9" style="grid-column: span 10; grid-row: span 2;"></div>
+                        <div class="broadsheet-grid" id="grid1" style="padding: 0 10px 10px 10px;">
+                            <!-- Row 1 -->
+                            <div class="drop-slot empty-slot" data-slot="1" style="grid-column: span 4; grid-row: span 2;"></div>
+                            <div class="drop-slot empty-slot" data-slot="2" style="grid-column: span 1; grid-row: span 2;"></div>
+                            <div class="drop-slot empty-slot" data-slot="3" style="grid-column: span 3; grid-row: span 2;"></div>
+                            <!-- Row 2 -->
+                            <div class="drop-slot empty-slot" data-slot="4" style="grid-column: span 3; grid-row: span 2;"></div>
+                            <div class="drop-slot empty-slot" data-slot="5" style="grid-column: span 2; grid-row: span 2;"></div>
+                            <div class="drop-slot empty-slot" data-slot="6" style="grid-column: span 1; grid-row: span 2;"></div>
+                            <div class="drop-slot empty-slot" data-slot="7" style="grid-column: span 2; grid-row: span 2;"></div>
+                            <!-- Row 3 -->
+                            <div class="drop-slot empty-slot" data-slot="8" style="grid-column: span 2; grid-row: span 2;"></div>
+                            <div class="drop-slot empty-slot" data-slot="9" style="grid-column: span 1; grid-row: span 2;"></div>
+                            <div class="drop-slot empty-slot" data-slot="10" style="grid-column: span 2; grid-row: span 2;"></div>
+                            <div class="drop-slot empty-slot" data-slot="11" style="grid-column: span 3; grid-row: span 2;"></div>
                         </div>
                         
                         <!-- Declaration Footer Page 1 -->
@@ -503,23 +548,70 @@
                     </div>
 
                     <!-- PAGE 2 -->
-                    <div class="page-layer" id="page2" style="padding: 15px; box-sizing: border-box;">
-                        <header class="inner-page-header">
-                            <span>আজকের সংবাদ | পৃষ্ঠা ২</span>
-                            <span class="epaperCurrentDate2"></span>
-                            <span>দৈনিক ভোলা টাইমস্</span>
+                    <div class="page-layer" id="page2" style="padding: 10px; box-sizing: border-box;">
+                        <header style="background: linear-gradient(to right, #e6e6e6 0%, #111111 100%); display: flex; justify-content: space-between; align-items: center; padding: 5px 15px; margin-bottom: 10px; font-family: 'Noto Sans Bengali', sans-serif;">
+                            <div style="display: flex; align-items: center; color: #111111;">
+                                <span style="font-size: 2.2rem; font-weight: bold; line-height: 1; margin-right: 15px;">২</span>
+                                @if(!empty($themeSettings['logo_image']))
+                                    <img src="{{ asset($themeSettings['logo_image']) }}" alt="Logo" style="height: 35px; object-fit: contain;">
+                                @else
+                                    <span style="font-size: 1.5rem; font-weight: bold; font-family: serif; line-height: 1;">{!! $themeSettings['logo_text'] ?? 'দৈনিক ভোলা টাইমস্' !!}</span>
+                                @endif
+                            </div>
+                            <div style="text-align: right; font-size: 0.85rem; line-height: 1.3; color: #ffffff;">
+                                <span class="epaperFullDate2">{{ $formattedEPaperHeaderDate }}</span>
+                            </div>
                         </header>
 
-                        <div class="broadsheet-grid" id="grid2">
-                            <div class="drop-slot empty-slot" data-slot="1" style="grid-column: span 16; grid-row: span 6;"></div>
-                            <div class="drop-slot" data-slot="2" style="grid-column: span 16; grid-row: span 6;"></div>
-                            <div class="drop-slot" data-slot="3" style="grid-column: span 12; grid-row: span 5;"></div>
-                            <div class="drop-slot" data-slot="4" style="grid-column: span 8; grid-row: span 5;"></div>
-                            <div class="drop-slot" data-slot="5" style="grid-column: span 12; grid-row: span 5;"></div>
-                            <div class="drop-slot" data-slot="6" style="grid-column: span 8; grid-row: span 5;"></div>
-                            <div class="drop-slot" data-slot="7" style="grid-column: span 8; grid-row: span 5;"></div>
-                            <div class="drop-slot" data-slot="8" style="grid-column: span 8; grid-row: span 5;"></div>
-                            <div class="drop-slot" data-slot="9" style="grid-column: span 8; grid-row: span 5;"></div>
+                        <div class="broadsheet-grid" id="grid2" style="padding: 0 10px 10px 10px;">
+                            <!-- Column 1: Top (Editorial) -->
+                            <div class="category-box" style="grid-column: 1; grid-row: 1;">
+                                <div class="category-header">
+                                    <i class="fa-solid fa-pen-nib"></i>
+                                    <span>সম্পাদকীয়</span>
+                                </div>
+                                <div class="drop-slot empty-slot" data-slot="1" style="flex: 1; border: none; background: transparent;"></div>
+                            </div>
+                            <!-- Column 2: Top (Economy) -->
+                            <div class="category-box" style="grid-column: 2; grid-row: 1;">
+                                <div class="category-header">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                    <span>অর্থনীতি</span>
+                                </div>
+                                <div class="drop-slot empty-slot" data-slot="2" style="flex: 1; border: none; background: transparent;"></div>
+                            </div>
+                            <!-- Column 3: Top (Education) -->
+                            <div class="category-box" style="grid-column: 3; grid-row: 1;">
+                                <div class="category-header">
+                                    <i class="fa-solid fa-user-graduate"></i>
+                                    <span>শিক্ষা</span>
+                                </div>
+                                <div class="drop-slot empty-slot" data-slot="3" style="flex: 1; border: none; background: transparent;"></div>
+                            </div>
+                            <!-- Column 1: Bottom (Entertainment) -->
+                            <div class="category-box" style="grid-column: 1; grid-row: 2;">
+                                <div class="category-header">
+                                    <i class="fa-solid fa-masks-theater"></i>
+                                    <span>বিনোদন</span>
+                                </div>
+                                <div class="drop-slot empty-slot" data-slot="4" style="flex: 1; border: none; background: transparent;"></div>
+                            </div>
+                            <!-- Column 2: Bottom (International) -->
+                            <div class="category-box" style="grid-column: 2; grid-row: 2;">
+                                <div class="category-header">
+                                    <i class="fa-solid fa-globe"></i>
+                                    <span>আন্তর্জাতিক</span>
+                                </div>
+                                <div class="drop-slot empty-slot" data-slot="5" style="flex: 1; border: none; background: transparent;"></div>
+                            </div>
+                            <!-- Column 3: Bottom (Sports) -->
+                            <div class="category-box" style="grid-column: 3; grid-row: 2;">
+                                <div class="category-header">
+                                    <i class="fa-solid fa-trophy"></i>
+                                    <span>খেলা</span>
+                                </div>
+                                <div class="drop-slot empty-slot" data-slot="6" style="flex: 1; border: none; background: transparent;"></div>
+                            </div>
                         </div>
 
                         <!-- Declaration Footer Page 2 -->
@@ -530,11 +622,19 @@
                     </div>
 
                     <!-- PAGE 3 (JUMPS) -->
-                    <div class="page-layer" id="page3" style="padding: 15px; box-sizing: border-box;">
-                        <header class="inner-page-header">
-                            <span>বাকি অংশ (ফিচার ও কলাম) | পৃষ্ঠা ৩</span>
-                            <span class="epaperCurrentDate2"></span>
-                            <span>দৈনিক ভোলা টাইমস্</span>
+                    <div class="page-layer" id="page3" style="padding: 10px; box-sizing: border-box;">
+                        <header style="background: linear-gradient(to right, #e6e6e6 0%, #111111 100%); display: flex; justify-content: space-between; align-items: center; padding: 5px 15px; margin-bottom: 10px; font-family: 'Noto Sans Bengali', sans-serif;">
+                            <div style="display: flex; align-items: center; color: #111111;">
+                                <span style="font-size: 2.2rem; font-weight: bold; line-height: 1; margin-right: 15px;">৩</span>
+                                @if(!empty($themeSettings['logo_image']))
+                                    <img src="{{ asset($themeSettings['logo_image']) }}" alt="Logo" style="height: 35px; object-fit: contain;">
+                                @else
+                                    <span style="font-size: 1.5rem; font-weight: bold; font-family: serif; line-height: 1;">{!! $themeSettings['logo_text'] ?? 'দৈনিক ভোলা টাইমস্' !!}</span>
+                                @endif
+                            </div>
+                            <div style="text-align: right; font-size: 0.85rem; line-height: 1.3; color: #ffffff;">
+                                <span class="epaperFullDate2">{{ $formattedEPaperHeaderDate }}</span>
+                            </div>
                         </header>
 
                         <div class="jump-grid" id="grid3"></div>
@@ -554,27 +654,50 @@
                     </div>
 
                     <!-- PAGE 4 -->
-                    <div class="page-layer" id="page4" style="padding: 15px; box-sizing: border-box;">
-                        <header class="inner-page-header">
-                            <span>শেষ পাতা | পৃষ্ঠা ৪</span>
-                            <span class="epaperCurrentDate2"></span>
-                            <span>দৈনিক ভোলা টাইমস্</span>
-                        </header>
+                    <div class="page-layer" id="page4" style="padding: 10px; box-sizing: border-box;">
+                            <div class="broadsheet-grid" id="grid4" style="padding: 0 10px 10px 10px;">
+                                <!-- Header (Takes 5 columns, Row 1) -->
+                                <header style="grid-column: 1 / span 5; grid-row: 1; display: flex; flex-direction: column; font-family: 'Noto Sans Bengali', sans-serif;">
+                                    <!-- Top part: Left Black Box + Logo -->
+                                    <div style="display: flex; flex: 1; min-height: 80px;">
+                                        <!-- Left Black Box -->
+                                        <div style="background-color: #111111; color: #ffffff; padding: 15px; display: flex; align-items: center; justify-content: center; border-top-left-radius: 4px;">
+                                            <span style="writing-mode: vertical-rl; transform: rotate(180deg); font-size: 1.8rem; font-weight: 800; letter-spacing: 2px;">শেষ পাতা</span>
+                                        </div>
+                                        <!-- Logo Area -->
+                                        <div style="flex: 1; display: flex; align-items: center; justify-content: center; background-color: #ffffff; border: 2px solid #111111; border-left: none; border-bottom: none; border-top-right-radius: 4px;">
+                                            @if(!empty($themeSettings['logo_image']))
+                                                <img src="{{ asset($themeSettings['logo_image']) }}" alt="দৈনিক ভোলা টাইমস্" style="max-height: 55px; max-width: 100%; object-fit: contain;">
+                                            @else
+                                                <span style="font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; color: #111111; line-height: 1;">দৈনিক ভোলা<span style="color: #dc2626;">টাইমস্</span></span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <!-- Bottom Black Box -->
+                                    <div style="background-color: #111111; color: #ffffff; padding: 6px 15px; font-size: 0.95rem; display: flex; justify-content: space-between; align-items: center; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;">
+                                        <span class="epaperFullDate2">{{ $formattedEPaperHeaderDate ?? $formattedDate }}</span>
+                                    </div>
+                                </header>
 
-                        <div class="broadsheet-grid" id="grid4">
-                            <div class="drop-slot" data-slot="1" style="grid-column: span 12; grid-row: span 5;"></div>
-                            <div class="drop-slot" data-slot="2" style="grid-column: span 8; grid-row: span 5;"></div>
-                            <div class="drop-slot" data-slot="3" style="grid-column: span 12; grid-row: span 5;"></div>
-                            <div class="drop-slot" data-slot="4" style="grid-column: span 8; grid-row: span 4;"></div>
-                            <div class="drop-slot" data-slot="5" style="grid-column: span 8; grid-row: span 4;"></div>
-                            <div class="drop-slot" data-slot="6" style="grid-column: span 8; grid-row: span 4;"></div>
-                            <div class="drop-slot" data-slot="7" style="grid-column: span 8; grid-row: span 4;"></div>
-                            <div class="drop-slot" data-slot="8" style="grid-column: span 8; grid-row: span 4;"></div>
-                            <div class="drop-slot" data-slot="9" style="grid-column: span 8; grid-row: span 4;"></div>
-                            <div class="drop-slot" data-slot="10" style="grid-column: span 8; grid-row: span 4;"></div>
-                            <div class="drop-slot" data-slot="11" style="grid-column: span 8; grid-row: span 4;"></div>
-                            <div class="drop-slot" data-slot="12" style="grid-column: span 32; grid-row: span 3;"></div>
-                        </div>
+                                <!-- Slot 3 (Takes 3 columns, starts from top Row 1 and spans to Row 3) -->
+                                <div class="drop-slot empty-slot" data-slot="3" style="grid-column: 6 / span 3; grid-row: 1 / span 3; border: 2px solid #111111; border-radius: 4px; background: #ffffff; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05);"></div>
+
+                                <!-- Grid Row 1 (Remaining slots) -->
+                                <div class="drop-slot empty-slot" data-slot="1" style="grid-column: 1 / span 4; grid-row: 2 / span 2;"></div>
+                                <div class="drop-slot empty-slot" data-slot="2" style="grid-column: 5 / span 1; grid-row: 2 / span 2;"></div>
+
+                                <!-- Grid Row 2 -->
+                                <div class="drop-slot empty-slot" data-slot="4" style="grid-column: 1 / span 3; grid-row: 4 / span 2;"></div>
+                                <div class="drop-slot empty-slot" data-slot="5" style="grid-column: 4 / span 2; grid-row: 4 / span 2;"></div>
+                                <div class="drop-slot empty-slot" data-slot="6" style="grid-column: 6 / span 1; grid-row: 4 / span 2;"></div>
+                                <div class="drop-slot empty-slot" data-slot="7" style="grid-column: 7 / span 2; grid-row: 4 / span 2;"></div>
+                                
+                                <!-- Grid Row 3 -->
+                                <div class="drop-slot empty-slot" data-slot="8" style="grid-column: 1 / span 2; grid-row: 6 / span 2;"></div>
+                                <div class="drop-slot empty-slot" data-slot="9" style="grid-column: 3 / span 1; grid-row: 6 / span 2;"></div>
+                                <div class="drop-slot empty-slot" data-slot="10" style="grid-column: 4 / span 2; grid-row: 6 / span 2;"></div>
+                                <div class="drop-slot empty-slot" data-slot="11" style="grid-column: 6 / span 3; grid-row: 6 / span 2;"></div>
+                            </div>
 
                         <!-- Declaration Footer Page 4 -->
                         <div class="broadsheet-footer-brand">
@@ -643,23 +766,61 @@
         document.addEventListener('DOMContentLoaded', function() {
             const selectedDateVal = new Date('{{ $selectedDate->format('Y-m-d') }}');
             const dateSpan = document.getElementById('mastheadDateDisplay');
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const banglaDateFormatter = new Intl.DateTimeFormat('bn-BD', options);
-            
-            // Update date for Page headers if they exist
-            document.querySelectorAll('.epaperCurrentDate2').forEach(function(el) {
-                el.textContent = banglaDateFormatter.format(selectedDateVal);
-            });
-
-            const hijriSpan = document.getElementById('epaperHijriDate');
             const hijriOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+            let hijriStr = '';
             try {
-                const hijriDateFormatter = new Intl.DateTimeFormat('bn-BD-u-ca-islamic-umalqura', hijriOptions);
-                if(hijriSpan) hijriSpan.textContent = hijriDateFormatter.format(selectedDateVal) + ' হিজরি';
+                hijriStr = new Intl.DateTimeFormat('bn-BD-u-ca-islamic-umalqura', hijriOptions).format(selectedDateVal) + ' হিজরি';
             } catch(e) {
-                const hijriDateFormatter = new Intl.DateTimeFormat('bn-BD-u-ca-islamic', hijriOptions);
-                if(hijriSpan) hijriSpan.textContent = hijriDateFormatter.format(selectedDateVal) + ' হিজরি';
+                try {
+                    hijriStr = new Intl.DateTimeFormat('bn-BD-u-ca-islamic', hijriOptions).format(selectedDateVal) + ' হিজরি';
+                } catch(e2) {
+                    hijriStr = '';
+                }
             }
+            const hijriSpan = document.getElementById('epaperHijriDate');
+            if(hijriSpan && hijriStr) hijriSpan.textContent = hijriStr;
+
+            // Bangla Date Calculation
+            function getBanglaDate(date) {
+                const banglaMonths = ['বৈশাখ', 'জ্যৈষ্ঠ', 'আষাঢ়', 'শ্রাবণ', 'ভাদ্র', 'আশ্বিন', 'কার্তিক', 'অগ্রহায়ণ', 'পৌষ', 'মাঘ', 'ফাল্গুন', 'চৈত্র'];
+                function toBanglaNumber(num) {
+                    const engToBn = {'0':'০','1':'১','2':'২','3':'৩','4':'৪','5':'৫','6':'৬','7':'৭','8':'৮','9':'৯'};
+                    return num.toString().replace(/[0-9]/g, w => engToBn[w]);
+                }
+                const isLeapYear = (year) => ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0));
+                let year = date.getFullYear();
+                let month = date.getMonth();
+                let day = date.getDate();
+                const startOfYear = new Date(year, 0, 0);
+                const diff = (date - startOfYear) + ((startOfYear.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
+                const oneDay = 1000 * 60 * 60 * 24;
+                let dayOfYear = Math.floor(diff / oneDay);
+                let bnYear, bnMonth, bnDay;
+                if (month > 3 || (month === 3 && day >= 14)) {
+                    bnYear = year - 593;
+                    const boishakhStart = 31 + (isLeapYear(year) ? 29 : 28) + 31 + 13;
+                    dayOfYear -= boishakhStart;
+                } else {
+                    bnYear = year - 594;
+                    const prevLeapYear = ((year - 1) % 4 === 0 && (year - 1) % 100 !== 0) || ((year - 1) % 400 === 0);
+                    const prevYearDays = 365 + (prevLeapYear ? 1 : 0);
+                    const lastBoishakhDayOfYear = 31 + (prevLeapYear ? 29 : 28) + 31 + 14;
+                    dayOfYear = dayOfYear + prevYearDays - lastBoishakhDayOfYear;
+                }
+                const monthDays = [31, 31, 31, 31, 31, 30, 30, 30, 30, 30, isLeapYear(year) ? 31 : 30, 30];
+                let accum = 0;
+                for (let i = 0; i < 12; i++) {
+                    if (dayOfYear < accum + monthDays[i]) {
+                        bnDay = dayOfYear - accum + 1;
+                        bnMonth = i;
+                        break;
+                    }
+                    accum += monthDays[i];
+                }
+                return `${toBanglaNumber(bnDay)} ${banglaMonths[bnMonth]} ${toBanglaNumber(bnYear)} বঙ্গাব্দ`;
+            }
+            const bnSpan = document.getElementById('epaperBnDate');
+            if (bnSpan) bnSpan.textContent = getBanglaDate(selectedDateVal);
 
             // Render all canvas pages dynamically
             renderCanvas();
@@ -692,9 +853,23 @@
             // Reset and hide empty slots
             [1, 2, 4].forEach(page => {
                 document.querySelectorAll(`#grid${page} .drop-slot`).forEach(slot => {
-                    slot.innerHTML = '';
-                    slot.classList.add('empty-slot');
-                    slot.classList.remove('occupied');
+                    const slotId = parseInt(slot.getAttribute('data-slot'));
+                    if (page === 1 && slotId === 4) {
+                        slot.innerHTML = `
+                            <div class="slot-empty" style="padding: 10px; background: #f8fafc; color: #64748b; border: 1px dashed #cbd5e1; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; pointer-events: none;">
+                                <span style="font-size: 0.65rem; font-weight: bold; color: #94a3b8; text-transform: uppercase; margin-bottom: 5px;">বিজ্ঞাপন / Advertisement</span>
+                                <div style="flex: 1; width: 100%; background: #ffffff; border: 1px solid #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; color: #64748b; line-height: 1.4; border-radius: 4px; box-sizing: border-box; padding: 5px;">
+                                    বিজ্ঞাপন দিতে যোগাযোগ করুন<br>০১৭XXXXXXXX
+                                </div>
+                            </div>
+                        `;
+                        slot.classList.remove('empty-slot');
+                        slot.classList.add('occupied');
+                    } else {
+                        slot.innerHTML = '';
+                        slot.classList.add('empty-slot');
+                        slot.classList.remove('occupied');
+                    }
                     slot.removeAttribute('onclick');
                 });
             });
@@ -702,6 +877,9 @@
             [1, 2, 4].forEach(page => {
                 const slots = pagesData[page] || [];
                 slots.forEach(slotData => {
+                    if (!slotData.content && slotData.excerpt) {
+                        slotData.content = slotData.excerpt;
+                    }
                     const slotEl = document.querySelector(`#grid${page} .drop-slot[data-slot="${slotData.slot_id}"]`);
                     if (!slotEl) return;
 
@@ -711,22 +889,33 @@
                     // Attach click reader handler
                     slotEl.onclick = function() { openPrintReader(this); };
 
-                    // Hide photo if slot spans only 1 column
-                    const gridColumnStyle = slotEl.style.gridColumn || '';
-                    const spanCol = gridColumnStyle.includes('span') ? parseInt(gridColumnStyle.split('span')[1].trim()) : 8;
-                    let showPhoto = spanCol > 4 && slotData.image;
-                    if (slotData.style && slotData.style.hasOwnProperty('show_image')) {
-                        showPhoto = slotData.style.show_image && slotData.image;
+                    // Determine how to display photo: none, half, or full
+                    let showPhoto = 'none';
+                    if (slotData.image) {
+                        const styleVal = slotData.style ? slotData.style.show_image : undefined;
+                        if (styleVal === false || styleVal === 'none') {
+                            showPhoto = 'none';
+                        } else if (styleVal === true || styleVal === 'full' || styleVal === undefined) {
+                            showPhoto = 'full';
+                        } else if (styleVal === 'half') {
+                            showPhoto = 'half';
+                        } else {
+                            // Fallback to column span logic
+                            const gridColumnStyle = slotEl.style.gridColumn || '';
+                            const spanCol = gridColumnStyle.includes('span') ? parseInt(gridColumnStyle.split('span')[1].trim()) : 8;
+                            showPhoto = spanCol > 4 ? 'full' : 'none';
+                        }
                     }
 
                     // Render dynamic content
                     slotEl.innerHTML = `
-                        <div class="rendered-content" style="height: 100%; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box;">
+                        <div class="rendered-content" style="flex: 1; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box;">
                             <div class="rendered-title" style="font-size: ${slotData.style.font_size || 14}px; text-align: ${slotData.style.title_align || 'center'}; color: ${slotData.style.title_color || '#111111'}; font-weight: ${slotData.style.font_weight || 'bold'}; word-spacing: ${slotData.style.word_spacing || '0px'};">
                                 ${slotData.title}
                             </div>
-                            ${showPhoto ? `<div class="rendered-image-wrapper" style="flex-shrink:0;"><img src="${slotData.image}"></div>` : ''}
-                            <div class="rendered-excerpt" style="column-count: ${slotData.style.columns || 2}; column-gap: 15px; line-height: ${slotData.style.line_height || '1.15'}; text-align: ${slotData.style.text_align || 'justify'}; flex: 1; min-height: 0; overflow: hidden;">
+                            ${showPhoto === 'full' ? `<div class="rendered-image-wrapper full" style="flex-shrink:0;"><img src="${slotData.image}"></div>` : ''}
+                            <div class="rendered-excerpt" style="column-count: ${slotData.style.columns || 2}; column-gap: 8px; line-height: ${slotData.style.line_height || '1.02'}; text-align: ${slotData.style.text_align || 'justify'}; margin-top: auto; overflow: hidden;">
+                                ${showPhoto === 'half' ? `<div class="rendered-image-wrapper half" style="flex-shrink:0;"><img src="${slotData.image}"></div>` : ''}
                                 ${slotData.content}
                             </div>
                         </div>
@@ -838,6 +1027,9 @@
         // ─── Client-side automated copy-fitting binary search splitter ───
         function autoSplitCanvas() {
             console.log("Running autoSplitCanvas copy-fitting...");
+            
+            const savedPagesData = @json($pagesData);
+            let existingJumps = savedPagesData['3'] || [];
             let jumpItems = [];
 
             [1, 4].forEach(page => {
@@ -849,34 +1041,33 @@
                     const excerptEl = slotEl.querySelector('.rendered-excerpt');
                     if (!contentEl || !excerptEl) return;
                     
-                    // Restore full content if previously split so we calculate from original text
-                    if (slotEl.hasAttribute('data-full-content')) {
-                        excerptEl.innerHTML = slotEl.getAttribute('data-full-content');
-                    }
+                    // We use data-content which has the pure text without images
+                    let cleanText = slotEl.getAttribute('data-content');
+                    if (!cleanText) return;
+                    
+                    // Check if there is an image inside excerptEl that needs to be preserved
+                    const imgEl = excerptEl.querySelector('.rendered-image-wrapper');
+                    const imgHTML = imgEl ? imgEl.outerHTML : '';
+                    
+                    // Always restore full content first to calculate correct scrollHeight
+                    excerptEl.innerHTML = imgHTML + cleanText;
                     
                     // Get maximum allowed height
-                    const maxAllowedHeight = slotEl.clientHeight - 10;
                     const scrollHeight = contentEl.scrollHeight;
-                    console.log(`Slot ${slotId} on Page ${page}: clientHeight=${slotEl.clientHeight}, scrollHeight=${scrollHeight}, maxAllowedHeight=${maxAllowedHeight}`);
+                    console.log(`Slot ${slotId} on Page ${page}: clientHeight=${contentEl.clientHeight}, scrollHeight=${scrollHeight}`);
                     
-                    if (scrollHeight > maxAllowedHeight) {
-                        // Save full content if not already saved
-                        let cleanText = slotEl.getAttribute('data-full-content') || excerptEl.innerText;
-                        if (!slotEl.hasAttribute('data-full-content')) {
-                            slotEl.setAttribute('data-full-content', cleanText);
-                        }
-                        
+                    if (contentEl.scrollHeight > contentEl.clientHeight + 2 || excerptEl.scrollWidth > excerptEl.clientWidth + 2) {
                         let low = 0;
                         let high = cleanText.length;
                         let bestSplit = 0;
-                        const jumpTagHTML = ' <span class="jump-tag">... বাকি অংশ ৩য় পাতায় দেখুন</span>';
+                        const jumpTagHTML = ' <span class="jump-tag">৩য় পাতায় দেখুন</span>';
                         
                         while (low <= high) {
                             let mid = Math.floor((low + high) / 2);
                             let testText = cleanText.substring(0, mid);
-                            excerptEl.innerHTML = testText + jumpTagHTML;
+                            excerptEl.innerHTML = imgHTML + testText + jumpTagHTML;
                             
-                            if (contentEl.scrollHeight <= maxAllowedHeight) {
+                            if (contentEl.scrollHeight <= contentEl.clientHeight + 2 && excerptEl.scrollWidth <= excerptEl.clientWidth + 2) {
                                 bestSplit = mid;
                                 low = mid + 1;
                             } else {
@@ -887,14 +1078,16 @@
                         let finalPageText = cleanText.substring(0, bestSplit);
                         let jumpText = cleanText.substring(bestSplit);
                         
-                        excerptEl.innerHTML = finalPageText + jumpTagHTML;
-                        
-                        // Update content attribute for print modal reader to show the full news!
-                        slotEl.setAttribute('data-content', cleanText);
+                        excerptEl.innerHTML = imgHTML + finalPageText + jumpTagHTML;
                         
                         console.log(`-> Split triggered for Slot ${slotId}! bestSplit=${bestSplit}, jumpText length=${jumpText.length}`);
                         
-                        jumpItems.push({ from_page: page, title: slotEl.getAttribute('data-title'), content: jumpText });
+                        let existing = existingJumps.find(j => parseInt(j.slot_id) === parseInt(slotId) && parseInt(j.from_page) === parseInt(page));
+                        if (existing && existing.is_edited) {
+                            jumpItems.push(existing);
+                        } else {
+                            jumpItems.push({ from_page: page, slot_id: slotId, title: slotEl.getAttribute('data-title'), content: jumpText, is_edited: false });
+                        }
                     } else {
                         console.log(`-> No split needed for Slot ${slotId}`);
                     }
@@ -922,9 +1115,8 @@
                             >
                                 <h4 class="jump-title">
                                     ${jump.title}
-                                    <span class="jump-meta">(${jump.from_page}ম পাতার পর)</span>
                                 </h4>
-                                <div class="rendered-excerpt" style="column-count: 1; column-gap: 15px; text-align: justify; line-height: 1.6;">
+                                <div class="rendered-excerpt" style="column-count: auto; overflow: visible; display: block; break-inside: auto; text-align: justify; line-height: 1.6;">
                                     ${jump.content}
                                 </div>
                             </div>

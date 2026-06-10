@@ -552,7 +552,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{ route('admin.epaper.index') }}" class="menu-link {{ request()->routeIs('admin.epaper.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.epaper.index') }}" target="_blank" class="menu-link {{ request()->routeIs('admin.epaper.index') ? 'active' : '' }}">
                         <i class="fa-solid fa-file-pdf"></i>
                         <span>ই-পেপার (E-Paper)</span>
                     </a>
