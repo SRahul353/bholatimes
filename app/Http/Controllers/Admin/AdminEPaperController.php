@@ -46,8 +46,9 @@ class AdminEPaperController extends Controller
         $dateString = $request->input('date');
         $date = Carbon::parse($dateString);
 
-        // Find existing E-Paper layout for this date
-        $epaper = EPaper::whereDate('publish_date', $date)->first();
+        // Find existing E-Paper layout for this date. 
+        // We use $dateString literally to prevent UTC conversion bugs that cause the date to shift back by 1 day.
+        $epaper = EPaper::whereDate('publish_date', $dateString)->first();
 
         $savedLayout = [
             '1' => [],
@@ -115,12 +116,13 @@ class AdminEPaperController extends Controller
             'title' => 'nullable|string|max:100'
         ]);
 
-        $date = Carbon::parse($request->input('date'));
+        $dateString = $request->input('date');
         $layoutData = $request->input('layout'); 
 
         // Save or update layout
+        // We use $dateString literally to prevent UTC conversion bugs that cause the date to shift back by 1 day.
         $epaper = EPaper::updateOrCreate(
-            ['publish_date' => $date, 'page_number' => 1],
+            ['publish_date' => $dateString, 'page_number' => 1],
             [
                 'title' => $request->input('title') ?? 'প্রথম পাতা',
                 'pages_data' => $layoutData,

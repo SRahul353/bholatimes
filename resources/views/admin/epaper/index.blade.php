@@ -1728,8 +1728,9 @@
                             }
                         });
                         document.getElementById('epaperSlogan').value = data.title || 'প্রথম পাতা';
-                        if (data.formatted_date) {
-                            document.getElementById('mastheadDateDisplay').innerHTML = '<i class="fa-regular fa-calendar" style="width: 15px;"></i> ' + data.formatted_date;
+                        if (data.formatted_epaper_header_date) {
+                            const mainDate = document.getElementById('epaperEnDate');
+                            if(mainDate) mainDate.textContent = data.formatted_epaper_header_date;
                             
                             // Generate full date for inner headers
                             try {
